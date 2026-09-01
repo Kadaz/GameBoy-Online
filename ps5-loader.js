@@ -129,6 +129,15 @@
 
             var romBuffer =
                 await romResponse.arrayBuffer();
+            var romBytes = new Uint8Array(romBuffer);
+            var romString = "";
+
+           for (var i = 0; i < romBytes.length; i += 8192) {
+           romString += String.fromCharCode.apply(
+           null,
+        romBytes.subarray(i, Math.min(i + 8192, romBytes.length))
+    );
+}
 
             if (
                 !romBuffer ||
